@@ -1,5 +1,5 @@
 # Find-your-Timetable
-University-specific project: prototype in a single day, improvements in the following months. NUCES-FAST folks should enjoy this one.
+University-specific project: prototype in a single day, improvements in the following months. **NUCES-FAST** folks should enjoy this one.
 
 Having to scour for your timetable through a Google Spreadsheet link provided to you by the administration team is a task of its own, managing all of the timetable according to your needs. It gets worse when electives and repeat courses are thrown in the mix and you also have to manage them.
 
@@ -9,7 +9,7 @@ What the script provides as benefits:
 - Input your degree, batch year, and section, and get a list of courses you have registered for.
 - The data is always up to date with the changes made on the original spreadsheet, so you can track any changes in timings or rooms of your classes.
 
-What this project bluntly sucks in:
+What this project _bluntly_ sucks in:
 - The UI is minimal, so it could be unpleasant for a few eyes.
 - A few timing issues here and there, and not properly labelling the time durations for a few classes.
 - The process, for now, is internet-dependent. Don't expect it to work if you don't have an internet connection.
@@ -28,4 +28,4 @@ If you're interested in this little scripture, do let me know on my email. That'
 
 
 
-Why didn't anyone think of making this before?
+_Why didn't anyone think of making something like this before?_
