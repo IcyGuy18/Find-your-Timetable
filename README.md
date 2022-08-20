@@ -24,7 +24,7 @@ What I intend to work on:
 - Make the code a LOT more tidier and a LOT more generic, and an option to enter the URL which will be used for getting the data.
 - Offer an offline mode on the off-chance there's no internet, so a local excel file will be used to view the schedule.
 
-If you're interested in this little scripture, do let me know on my email. That's really all I have to say...
+Any more improvements I get suggested along the way, I'll gladly consider. If you're interested in this little scripture, do let me know on my email. That's really all I have to say...
 
 
 
