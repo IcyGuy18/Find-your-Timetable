@@ -14,6 +14,7 @@ What this project bluntly sucks in:
 - A few timing issues here and there, and not properly labelling the time durations for a few classes.
 - The process, for now, is internet-dependent. Don't expect it to work if you don't have an internet connection.
 - The spreadsheet ID, along with a few other attributes, are hardcoded into the script... whoops.
+- Little commenting in the code (this is a sin in and of itself).
 
 What I intend to work on:
 - Repeat/Elective courses are not handled. The program assumes you have a normal courses workload for a semester.
@@ -23,4 +24,8 @@ What I intend to work on:
 - Make the code a LOT more tidier and a LOT more generic, and an option to enter the URL which will be used for getting the data.
 - Offer an offline mode on the off-chance there's no internet, so a local excel file will be used to view the schedule.
 
-If you're interested in this little scripture, do let me know on my email.
+If you're interested in this little scripture, do let me know on my email. That's really all I have to say...
+
+
+
+Why didn't anyone think of making this before?
