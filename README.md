@@ -23,9 +23,8 @@ Entering your information, you'll get a list of classes and labs you have to tak
 - Messy code and little commenting (this is a sin in and of itself).
 
 # What I intend to work on
-- Repeat/Elective courses are not handled (the program assumes you have a normal workload for a semester).
+- Handle Repeat/Elective courses.
 - Handle MS/PhD courses and their electives as well.
-- Handle different timings for the classes.
 - Polish up the UI, so it's pleasant just enough for students to keep on using.
 - Make the code a **LOT** more tidier and a **LOT** more generic.
 - An option to enter the URL which will be used for getting the timetable data.
