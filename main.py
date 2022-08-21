@@ -2,24 +2,21 @@
 # coding: utf-8
 
 # If you're not sure about the libraries listed here, just download them first - I intend to explain them in detail later.
+
+import setup
+
+setup._setup()
+
 import requests
-import urllib.request # Check for internet connection first
 import pandas as pd
 import openpyxl # specially required for .xlsx file reading
 import numpy as np
 from io import BytesIO # Reading the .xlsx file
-from IPython.display import display, HTML # A fancy way to display the dataframes
+from IPython.display import display, HTML # A fancy way to display the dataframes, for debugging purposes
 from tkinter import * # Our GUI
 from tkinter import messagebox
 import re
 import xlrd
-
-def internet_is_available(host='http://www.google.com'):
-    try:
-        urllib.request.urlopen(host)
-        return True
-    except:
-        return False
 
 colors = {}
 wb = None
@@ -27,7 +24,7 @@ wb = None
 root = None
 
 def main():
-    if not internet_is_available():
+    if not setup.internet_is_available():
         messagebox.showinfo('No internet connection', 'Please connect to the internet before using this application.')
         return
     pd.set_option(
@@ -46,7 +43,7 @@ def main():
     wb = openpyxl.load_workbook(filename=data) # Open up the excel sheet
     #wb = wb.active # Mark it as an active sheet
     days = ['Monday','Tuesday','Wednesday','Thursday','Friday'] # The sheets we require for now
-    sheet = wb.get_sheet_by_name(days[-1]) # Retrieve a single day's sheet for now
+    sheet = wb[days[-1]] # Retrieve a single day's sheet for now
     enough = False # A failsafe to just collect the degrees
     global colors
     colors = {}
@@ -79,6 +76,7 @@ def process():
         root.destroy()
         root = Tk()
         root.eval('tk::PlaceWindow . center')
+        Label(text=info + "\n").pack()
         days = ['Monday','Tuesday','Wednesday','Thursday','Friday'] # The sheets we require for now
         # Next 2 variables are for locating positions of Room and Lab cell values in sheet
         roomInfoIdx = 0
@@ -89,7 +87,7 @@ def process():
             dfClasses = None # A dataframe for classes
             dfHex = None # A dataframe for hex values of cell colour, corresponding with the classes dataframe
             
-            sheet = wb.get_sheet_by_name(i) # Retrieve a sheet for that particular day
+            sheet = wb[i] # Retrieve a sheet for that particular day
             # Temporary dataframes being made here for manipulation
             dfClasses = pd.DataFrame(
                     sheet.values
