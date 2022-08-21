@@ -18,6 +18,7 @@ Entering your information, you'll get a list of classes and labs you have to tak
 # What the project _bluntly_ sucks in
 - The UI is minimal, so it could be unpleasant for a few eyes.
 - A few timing issues here and there, and not properly labelling the time durations for a few classes.
+- The script might not pick a few classes because of row/column irregularities.
 - The process, for now, is internet-dependent. Don't expect it to work if you don't have an internet connection.
 - The spreadsheet ID, along with a few other attributes, are hardcoded into the script... _whoops._
 - Messy code and little commenting (this is a sin in and of itself).
