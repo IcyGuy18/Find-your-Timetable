@@ -16,13 +16,18 @@ What this project _bluntly_ sucks in:
 - The spreadsheet ID, along with a few other attributes, are hardcoded into the script... whoops.
 - Little commenting in the code (this is a sin in and of itself).
 
-What I intend to work on:
+**What I intend to work on:**
 - Repeat/Elective courses are not handled. The program assumes you have a normal courses workload for a semester.
 - Handle MS/PhD courses and their electives as well.
 - Handle different timings for the classes.
 - Polish up the UI, so it's just pleasant enough for users to keep on using.
 - Make the code a LOT more tidier and a LOT more generic, and an option to enter the URL which will be used for getting the data.
 - Offer an offline mode on the off-chance there's no internet, so a local excel file will be used to view the schedule.
+
+**HOW TO RUN**
+Just simply run the main file, all the dependencies will be installed automatically if not present in your system.
+You'll be presented with a GUI where you can select your degree, batch year, and your section.
+Entering your information, you'll get a list of classes and labs you have to take on what day, in which room, and at what time.
 
 Any more improvements I get suggested along the way, I'll gladly consider. If you're interested in this little scripture, do let me know on my email. That's really all I have to say...
 
