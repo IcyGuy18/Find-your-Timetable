@@ -79,8 +79,9 @@ def process():
         root.eval('tk::PlaceWindow . center')
         Label(text=info + "\n").pack()
         days = ['Monday','Tuesday','Wednesday','Thursday','Friday'] # The sheets we require for now
-        # Next 2 variables are for locating positions of Room and Lab cell values in sheet
+        # Next 3 variables are for locating positions of Room and Lab cell values in sheet
         roomInfoIdx = 0
+        labInfoIdx = 0
         hitRoomInfo = False
         sec = section.get() # get value of section
         for i in days:
@@ -112,12 +113,9 @@ def process():
                     else: # if hitRoomInfo == true, then we will gather the dataframes and break subsequently
                         # First, drop the NaN columns
                         dfHex.columns = dfClasses.iloc[roomInfoIdx]
-                        dfClasses = dfClasses.dropna( # For courses, this is how we'll do it
-                            axis=1, how='all'
-                        ).replace(
-                            nan, '', regex=True
-                        )
                         dfClasses.columns = dfClasses.iloc[roomInfoIdx]
+                        dfClasses.columns = ["cols_"+str(i) if a == None else a for i, a in enumerate(dfClasses.columns)]
+                        dfHex.columns = ["cols_"+str(i) if a == None else a for i, a in enumerate(dfHex.columns)]
                         # Now drop up till that specific row in Dataframe
                         dfClasses = dfClasses.iloc[roomInfoIdx+1:]
                         dfHex = dfHex.iloc[roomInfoIdx+1:]
@@ -135,6 +133,8 @@ def process():
                         continue # No need to traverse this column
                     if k is None or k == '': # Failsafe to ignore unused columns
                         continue
+                    if dfHex.at[j,k] is None or dfClasses.at[j,k] is None:
+                        continue # We have to ignore this value since we don't have any use for it
                     if dfHex.at[j,k] == colorToSearch and sec in dfClasses.at[j,k]:
                         # If found, note down the information (as text) (using time and room)
                         if not firstHit:
@@ -142,7 +142,17 @@ def process():
                             Label(text="On " + i + ":").pack()
                         className = dfClasses.at[j,k]
                         className = sub("[\(\[].*?[\)\]]", "", className)
-                        tex = className + " in " + dfClasses.at[j,'Room'] + ", timings: " + k
+                        if ':' in className: # Handling special timing cases
+                            tempIdx = className.find(' 0')
+                            if className[tempIdx-1] != ' ': tempIdx = className.find(' 1')
+                            k = className[tempIdx:]
+                            className = className[:tempIdx]
+                        elif dfClasses.at[j,'Room'][1] != '-': # Handling labs
+                            tempIdx = dfClasses.columns.get_loc(k) # Get column index
+                            tempRow = dfClasses.loc[dfClasses['Room'] == 'Lab']
+                            k = tempRow.values.tolist()[-1][tempIdx]
+                        tex = className.rstrip() + " in " + dfClasses.at[j,'Room'] + ", timings: " + k
+                            
                         Label(text=tex).pack()
             if firstHit:
                 Label(text="").pack()
