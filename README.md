@@ -7,7 +7,7 @@ Having to scour for your timetable through a Google Spreadsheet provided to you 
 The Spreadsheet access is public, so with that in mind, the basic premise for this project is to read all of the data presently noted online and format it in such a manner that, through a few clicks, all of the subjects that you're registered for in a semester will be presented to you for you to either note down, or simply look up on without having to keep checking for your classes, the timings, and in what rooms they're being held in.
 
 # How to run
-S run the main file in a Python environment. All dependencies will be installed automatically if not present in your system.
+Simply run the main file in a Python environment. All dependencies will be installed automatically if not present in your system.
 You'll be presented with a UI where you can select your degree, batch year, and your section.
 Entering your information, you'll get a list of classes and labs you have to take on what day, in which room, and at what time.
 
