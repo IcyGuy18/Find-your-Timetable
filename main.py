@@ -7,16 +7,17 @@ import setup
 
 setup._setup()
 
-import requests
-import pandas as pd
-import openpyxl # specially required for .xlsx file reading
-import numpy as np
+from requests import get
+#import pandas as pd
+from pandas import set_option, DataFrame
+#import openpyxl # specially required for .xlsx file reading
+from openpyxl import load_workbook
+#import numpy as np
+from numpy import nan
 from io import BytesIO # Reading the .xlsx file
 from IPython.display import display, HTML # A fancy way to display the dataframes, for debugging purposes
-from tkinter import * # Our GUI
-from tkinter import messagebox
-import re
-import xlrd
+from tkinter import Tk, Label, OptionMenu, StringVar, Button, messagebox # Our GUI
+from re import sub
 
 colors = {}
 wb = None
@@ -27,20 +28,20 @@ def main():
     if not setup.internet_is_available():
         messagebox.showinfo('No internet connection', 'Please connect to the internet before using this application.')
         return
-    pd.set_option(
+    set_option(
         'expand_frame_repr', False # This is done so that dataframe is all presented on a single line
     )
     # And the below commands are an extension of the command above
-    pd.set_option('display.max_rows', 500)
-    pd.set_option('display.max_columns', 500)
-    pd.set_option('display.width', 1000)
+    set_option('display.max_rows', 500)
+    set_option('display.max_columns', 500)
+    set_option('display.width', 1000)
     # Now this is where things get interesting
     ssid = "1uNvjtRePKdA-zpRzf1q-Ay0I5-Rh7mtvoI5odHKPARk"
     url = "https://docs.google.com/spreadsheets/export?exportFormat=xlsx&id=" + ssid
-    r = requests.get(url)
+    r = get(url)
     data = BytesIO(r.content)
     global wb
-    wb = openpyxl.load_workbook(filename=data) # Open up the excel sheet
+    wb = load_workbook(filename=data) # Open up the excel sheet
     #wb = wb.active # Mark it as an active sheet
     days = ['Monday','Tuesday','Wednesday','Thursday','Friday'] # The sheets we require for now
     sheet = wb[days[-1]] # Retrieve a single day's sheet for now
@@ -89,13 +90,13 @@ def process():
             
             sheet = wb[i] # Retrieve a sheet for that particular day
             # Temporary dataframes being made here for manipulation
-            dfClasses = pd.DataFrame(
+            dfClasses = DataFrame(
                     sheet.values
                 ) # Create a dataframe for accessing values with ease
             hexValues = [] # Makeshift list to create a dataframe manually
             for j in sheet.iter_rows():
-                hexValues.append([k.fill.start_color.index if k.fill.start_color.index not in ['00000000', 'FFFFFFFF', 0] else np.nan for k in j])
-            dfHex = pd.DataFrame(
+                hexValues.append([k.fill.start_color.index if k.fill.start_color.index not in ['00000000', 'FFFFFFFF', 0] else nan for k in j])
+            dfHex = DataFrame(
                 hexValues
             )
             rowIdx = 0
@@ -114,7 +115,7 @@ def process():
                         dfClasses = dfClasses.dropna( # For courses, this is how we'll do it
                             axis=1, how='all'
                         ).replace(
-                            np.nan, '', regex=True
+                            nan, '', regex=True
                         )
                         dfClasses.columns = dfClasses.iloc[roomInfoIdx]
                         # Now drop up till that specific row in Dataframe
@@ -140,7 +141,7 @@ def process():
                             firstHit = True
                             Label(text="On " + i + ":").pack()
                         className = dfClasses.at[j,k]
-                        className = re.sub("[\(\[].*?[\)\]]", "", className)
+                        className = sub("[\(\[].*?[\)\]]", "", className)
                         tex = className + " in " + dfClasses.at[j,'Room'] + ", timings: " + k
                         Label(text=tex).pack()
             if firstHit:
